@@ -1,0 +1,7 @@
+*.dump
+*.log
+*.pyc
+.pytest_cache
+.vagrant
+NOTES.md
+Vagrantfile

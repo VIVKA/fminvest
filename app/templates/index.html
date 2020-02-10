@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="1b16sVdPPr8ClfaJQdC3932CGc5hcsttOcxxC0jDRvE">
+  <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=2.0, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGfSURBVGhD7ZZRTsNADERzHMQBCFXLDfhAcCH+oXAUzlcJqcTpOGyJZ1krq8Qf+yRLzex4O94mbbtGo9FoNKLQH/ev9x+Hc65gjct/Q8AWm9wQsGxLf3x4kcLljP5z/zwM8R1yAAk+BDlJWUNIeKzPwkvBtg1JeA10NYQV/u8nAev6GOG1xiHI+gm30/RMYLt1yYTXkjUzPLYY9rgMgcvl6KnhksJO1tDSugqvyBB4uYwklPkgKiy86GTtsm6Er4bxoNnfJpnwsFie1cP/vnE+2MyjJF5zvRqZ8FpjAE94RftwWR8Sfjy1Em1JuMevp3NakMth4fXUjLW0Ft8WiwbIhYeF3e8zn+IN5PVP0PCDDsuEMQQ9eW8gr3/EE15JhsjeNt5AXn9393a4RZDi8IoEz4UXvIG8/pH0z1Np+FK8gbz+CQxR/ZeRBfLqRezedzd46Ya9cS3djXcj5q+lu/FuxPy1dDdso610N2yjrXQKa4imU1hDNJ3CGqLpFNYQTaewhmg6hTVE0ymsIZpOYQ3RdApriKZTWEM0vdFoCF33AyfX9bAilng2AAAAAElFTkSuQmCC">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@5.9.2/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/http-vue-loader@1.4.0/src/httpVueLoader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuex@3.1.1/dist/vuex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-i18n@8.11.2/dist/vue-i18n.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.0.6/dist/vue-router.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.25/builds/moment-timezone-with-data.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuejs-datepicker@1.5.4/dist/vuejs-datepicker.min.js"></script>
+
+  <style>
+    body {
+      font-family: Roboto;
+      background: #282828;
+      /*color: white;*/
+    }
+
+    .theme-light {
+      background: #f5deb3;
+      color: #333333;
+    }
+
+    .theme-dark {
+      background: #282828;
+      color: #d5c4a1;
+    }
+
+    .theme-light .settings-gear {
+      display: inline;
+      fill: #333333;
+    }
+
+    .theme-dark .settings-gear {
+      display: inline;
+      fill: #d5c4a1;
+    }
+
+    .theme-light .ui-block {
+      background: #ffffff;
+    }
+
+    .theme-dark .ui-block {
+      background: #3c3836;
+    }
+
+    .theme-light .ui-block .table {
+      color: #666666;
+    }
+
+    .theme-dark .ui-block .table {
+      color: #d5c4a1;
+    }
+
+    .theme-dark .text-secondary {
+      color: #a89984 !important;
+    }
+
+    .theme-dark .table td {
+      border-top: 1px solid #504945;
+    }
+
+    .theme-dark .table th {
+      border-bottom: 2px solid #504945;
+    }
+
+    .theme-dark .form-control {
+      background: #282828;
+      border-color: transparent;
+      color: #a89984;
+    }
+
+    .theme-dark .custom-select {
+      background: #282828;
+      border-color: transparent;
+      color: #a89984;
+    }
+
+    .theme-dark .form-control:focus {
+      background: #282828;
+      border-color: transparent;
+      color: #a89984;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+    .c1:hover {
+        background: #666;
+    }
+    .c1:hover + .c2 {
+        display: contents;
+        background: #666;
+    }
+    .c2 {
+        display: none;
+    }
+    .chart div {
+      font: 10px sans-serif;
+      background-color: steelblue;
+      text-align: right;
+      padding: 3px;
+      margin: 1px;
+      color: white;
+    }
+    .expense rect {
+      fill: #c00 !important;
+      stroke-opacity: 0;
+    }
+    .capital rect {
+      fill: wheat;
+      opacity: 0.5;
+    }
+
+   /* svg {
+      display: block;
+    }*/
+
+    .rules-view-template .income td:first-child {
+      /*background: wheat;*/
+      /*color: wheat;*/
+    }
+
+    .rules-view-template .expense td:first-child{
+      /*background: #fee;*/
+      /*color: firebrick;*/
+    }
+
+    .ui-block {
+        border-top: 2px solid goldenrod;
+        /*background: white;*/
+    }
+
+    .ui-block .content {
+        height: 400px;
+        overflow: scroll;
+    }
+
+    .font-mono {
+      font-family: Roboto Mono;
+    }
+
+    .scrolling-container {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" :class="$store.getters.theme">
+    <div class="container-fluid pt-2">
+      <navigation></navigation>
+      <router-view></router-view>
+      <div class="row mb-3">
+        <div class="col">
+          <span style="color: darkgoldenrod">Server food donations!</span>
+          <div style="font-family: Roboto Mono">
+            <b style="color: darkgoldenrod">BTC:</b>
+            <span style="color: #666">1P1ShDnLx4kBdMKzr8AfRZhzBeYCsAZ3wk</span>
+          </div>
+          <div style="font-family: Roboto Mono">
+            <b style="color: darkgoldenrod">BCH:</b>
+            <span style="color: #666">qrds0wl7pphz5gurp0s6stul40z44yqqfs2nwzx2w4</span>
+          </div>
+          <div style="font-family: Roboto Mono">
+            <b style="color: darkgoldenrod">ETH:</b>
+            <span style="color: #666">0x047F150929ab7D5E8b604F652f1C19b487340C57</span>
+          </div>
+          <div style="font-family: Roboto Mono">
+            <b style="color: darkgoldenrod">LTC:</b>
+            <span style="color: #666">LMmM3ZHAGxr3J7BsnbQUVZSJ5VVK4LPqgk</span>
+          </div>
+          <div style="font-family: Roboto Mono">
+            <b style="color: darkgoldenrod">XRP:</b>
+            <span style="color: #666">rsjdsKCPNVHQYKvt2LFehFGWmSNcNDgYJ1</span>
+          </div>
+          <span style="color: darkgoldenrod">Thank you!</span>
+        </div>
+      </div>
+
+      <div class="row pb-5">
+        <div class="col">
+          <span class="text-secondary">Информация о дивидендах Российских компаний берется с сайта</span> <a href="http://dohod.ru" class="text-primary">dohod.ru</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    Vue.use(Vuex, axios)
+
+    Vue.mixin({
+      data: function() {
+        return {
+          d3: d3,
+          moment: moment,
+        }
+      },
+      methods: {
+        currentLocale: function() {
+          return this.$store.state.locale
+        },
+        simpleInterval: function(updatedAt) {
+          // const diff = new Date() - new Date(updatedAt)
+          // const diffHours = diff / (1000 * 3600); // s * hour
+          // return diffHours.toFixed(1) + 'h ago'
+          const date = new Date(updatedAt)
+          const options = { day: '2-digit', month: '2-digit', year: '2-digit'}
+          return date.toLocaleDateString('ru-RU', options)
+        },
+        formatCurrency: function(c, country) {
+          if(!c) {
+            return ''
+          }
+
+          if(!country) {
+            return c.toFixed(2)
+          }
+
+          let currency = 'RUB'
+
+          if(country == 'RU'){
+            currency = 'RUB'
+          }
+          if(country == 'US'){
+            currency = 'USD'
+          }
+
+          return c.toLocaleString('ru-RU', {
+            style: 'currency',
+            currency: currency,
+          });
+        },
+      }
+    })
+
+    const messages = {
+      en: {
+        message: {
+          budget: 'Budget', investments: 'Investments',
+        }
+      },
+      ru: {
+        message: {
+          budget: 'Бюджет', investments: 'Инвестиции',
+        }
+      }
+    }
+
+    const i18n = new VueI18n({
+      locale: 'ru',
+      fallbackLocale: 'en',
+      messages,
+    })
+
+    const ver = '?55'
+
+    httpVueLoader.register(Vue, 'static/vue/portfolio/market-clock.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/navigation.vue'+ver)
+
+    httpVueLoader.register(Vue, 'static/vue/budget/expense-form.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/budget/income-form.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/budget/income-view.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/budget/rules-view.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/budget/stats-view.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/budget/chart-view.vue'+ver)
+
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-navigation.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/add-asset-form.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-status-view.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/get-recommendation-form.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-contents-view.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-asset.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-trades.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-dividends.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-gics.vue'+ver)
+    httpVueLoader.register(Vue, 'static/vue/portfolio/portfolio-simulation-hull.vue'+ver)
+
+    const routes = [
+      { path: '/budget', component: httpVueLoader('static/vue/budget-view.vue')  },
+      { path: '/investments', component: httpVueLoader('static/vue/investments-view.vue') }
+    ]
+
+    const router = new VueRouter({routes})
+
+    const store = new Vuex.Store({
+      state: {
+        token: '{{data.token}}',
+        selectedPortfolioId: false,
+        selectedPortfolioPeriod: 'ALL',
+        investmentsData: false,
+        portfolioData: false,
+        assetData: false,
+        tradesData: false,
+        dividendsData: false,
+        benchmarkData: false,
+        locale: 'en',
+        theme: 'light',
+        availableLocales: ['en', 'ru'],
+        availableThemes: ['light', 'dark'],
+      },
+      actions: {
+        selectLocale: async function(state, locale) {
+          state.commit('setSelectedLocale', locale)
+        },
+        selectTheme: async function(state, theme) {
+          state.commit('setSelectedTheme', theme)
+        },
+        loadInvestments: async function(state) {
+          const response = await axios.get('/investments')
+          const investmentsData = response.data
+
+          // select nominal portfolio id
+          // TODO: extract
+          const portfolioIds = investmentsData.portfolio_data.map(a => a[0])
+          let selectedPortfolioId = false
+          if (localStorage.selectedPortfolioId && portfolioIds.includes(parseInt(localStorage.selectedPortfolioId))) {
+            selectedPortfolioId = localStorage.selectedPortfolioId
+          } else {
+            selectedPortfolioId = investmentsData.portfolio_data[0][0]
+          }
+
+          state.commit('setInvestmentsData', investmentsData)
+          this.dispatch('selectPortfolio', selectedPortfolioId)
+        },
+        selectPortfolioPeriod: async function(state, portfolioPeriod) {
+          await this.dispatch({
+            type: 'loadBenchmarks',
+            portfolioId: state.state.selectedPortfolioId,
+            period: portfolioPeriod,
+          })
+          state.commit('setSelectedPortfolioPeriod', portfolioPeriod)
+        },
+        selectPortfolio: async function(state, portfolioId) {
+          await this.dispatch('loadAll', portfolioId)
+          state.commit('setSelectedPortfolioId', portfolioId)
+        },
+        reloadCurrentPortfolio: function(state) {
+          const portfolioId = state.state.selectedPortfolioId
+          // await this.dispatch('loadPortfolio', portfolioId)
+          this.dispatch('loadAll', portfolioId)
+        },
+        loadAll: async function(state, portfolioId) {
+          await this.dispatch('loadPortfolio', portfolioId)
+          await this.dispatch({
+            type: 'loadBenchmarks',
+            portfolioId: portfolioId,
+            period: state.state.selectedPortfolioPeriod,
+          })
+          this.dispatch('loadTrades', portfolioId)
+          this.dispatch('loadDividends', portfolioId)
+        },
+        createPortfolio: async function(state) {
+          await axios.post('/portfolios')
+          this.dispatch('loadInvestments')
+        },
+        duplicatePortfolio: function(state, portfolioId) {
+          console.log('not implemented')
+          // await axios.post(`/portfolios/${id}/duplicate`)
+          // this.dispatch('loadInvestments')
+        },
+        deletePortfolio: async function(state, portfolioId) {
+          await axios.delete(`/portfolios/${portfolioId}`)
+          this.dispatch('loadInvestments')
+        },
+        loadPortfolio: async function(state, portfolioId) {
+          const response = await axios.get(`/portfolios/${portfolioId}`)
+          state.commit('setPortfolioData', response.data.portfolioData)
+          state.commit('setAssetData', response.data.assetData)
+        },
+        loadTrades: async function (state, portfolioId) {
+          const response = await axios.get(`/portfolios/${portfolioId}/trades`)
+          state.commit('setTradesData', response.data.trades)
+        },
+        loadDividends: async function (state, portfolioId) {
+          const response = await axios.get(`/portfolios/${portfolioId}/dividends`)
+          state.commit('setDividendsData', response.data.dividends)
+        },
+        loadBenchmarks: async function (state, {portfolioId, period}) {
+          const response = await axios.get(`/portfolios/${portfolioId}/history/${period}`)
+          state.commit('setBenchmarksData', response.data.benchmark)
+        },
+      },
+      mutations: {
+        setSelectedLocale: function(state, locale) {
+          localStorage.locale = locale
+          i18n.locale = locale
+          state.locale = locale
+        },
+        setSelectedTheme: function(state, theme) {
+          localStorage.theme = theme
+          state.theme = theme
+        },
+        setSelectedPortfolioId: function(state, data) {
+          state.selectedPortfolioId = data
+          localStorage.selectedPortfolioId = data
+        },
+        setSelectedPortfolioPeriod: function(state, data) {
+          state.selectedPortfolioPeriod = data
+          localStorage.selectedPortfolioPeriod = data
+        },
+        setInvestmentsData: function(state, data) {
+          state.investmentsData = data
+        },
+        setPortfolioData: function(state, data) {
+          state.portfolioData = data
+        },
+        setAssetData: function(state, data) {
+          state.assetData = data
+        },
+        setTradesData: function(state, data) {
+          state.tradesData = data
+        },
+        setDividendsData: function(state, data) {
+          state.dividendsData = data
+        },
+        setBenchmarksData: function(state, data) {
+          state.benchmarkData = data
+        }
+      },
+      getters: {
+        theme: function(state) {
+          return `theme-${state.theme}`
+        }
+      }
+    })
+
+    const app = new Vue({store, router, i18n,
+      el: '#app',
+      created: function() {
+        if (localStorage.locale) {
+          this.$store.commit('setSelectedLocale', localStorage.locale)
+        }
+
+        if (localStorage.theme) {
+          this.$store.commit('setSelectedTheme', localStorage.theme)
+        }
+      }
+    })
+
+    router.replace('/investments')
+  </script>
+</body>
+</html>

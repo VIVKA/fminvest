@@ -1,0 +1,6 @@
+{
+  "name": "Factota",
+  "description": "Factota finance.",
+  "image": "heroku/python",
+  "addons": [ "heroku-postgresql" ]
+}

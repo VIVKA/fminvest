@@ -1,0 +1,6 @@
+[flake8]
+exclude =
+    app/misc/
+    migrations/
+    temp.py
+max-line-length = 120
