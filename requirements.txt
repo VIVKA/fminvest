@@ -1,5 +1,5 @@
 alembic==1.0.10
-certifi==2019.3.9
+certifi==2022.12.7
 cvxopt==1.2.3
 flake8==3.7.7
 Flask-BasicAuth==0.2.0
